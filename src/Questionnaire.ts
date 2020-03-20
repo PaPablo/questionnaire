@@ -1,14 +1,26 @@
 import yaml from "js-yaml";
 import fs from "graceful-fs";
-import { IQuestion } from "./Question";
+import { IQuestion, Question } from "./Question";
 
-class Questioannaire {
+class Questionnaire {
   version: string;
 
   firstQuestion?: IQuestion;
   currentQuestion: IQuestion | null;
 
   answers: IAnswer[];
+
+  static fromDocument(document: any) {
+    const { version, firstQuestion } = document;
+
+    const obj = new Questionnaire(version);
+    obj.setFirstQuestion(Question.fromDocument(firstQuestion));
+    return obj;
+  }
+  setFirstQuestion(question: Question) {
+    this.firstQuestion = question;
+    this.currentQuestion = this.firstQuestion;
+  }
 
   constructor(version: string) {
     this.version = version;
@@ -29,3 +41,5 @@ class Questioannaire {
     this.currentQuestion = this.currentQuestion!.nextQuestion(optionNumber);
   }
 }
+
+export { Questionnaire };
