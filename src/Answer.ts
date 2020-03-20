@@ -21,3 +21,5 @@ class Answer {
     this.nextAnswer = nextAnswer;
   }
 }
+
+export { IAnswer, Answer };

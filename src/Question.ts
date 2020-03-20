@@ -1,4 +1,5 @@
-import { IOption } from "./Option";
+import { IOption, Option } from "./Option";
+import { Answer } from "./Answer";
 
 interface IQuestion {
   // String array containing indications to the patient
@@ -16,6 +17,18 @@ interface IQuestion {
 }
 
 class Question implements IQuestion {
+  static fromDocument(document: any): Question {
+    const {text, indications, options} = document
+
+    let obj = new Question(
+      text,
+      indications,
+      options?.map((o: any) => Option.fromDocument(o))
+    );
+
+    return obj;
+  }
+
   indications: string[];
   text: string;
   options: IOption[];
@@ -28,7 +41,8 @@ class Question implements IQuestion {
   pickOption(optionNumber: number): IAnswer {
     const pickedOption = this.options[optionNumber] as IOption;
 
-    return new Answer(this.text, pickedOption.title, null);
+    const answer = new Answer(this.text, pickedOption.title, null)
+    return answer;
   }
 
   nextQuestion(optionNumber: number): IQuestion | null {

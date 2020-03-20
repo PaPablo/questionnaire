@@ -1,4 +1,4 @@
-import { IQuestion } from "./Question";
+import { IQuestion, Question } from "./Question";
 
 interface IOption {
   title: string;
@@ -6,6 +6,12 @@ interface IOption {
 }
 
 class Option implements IOption {
+  static fromDocument(document: any) {
+    const { title, nextQuestion } = document;
+    let obj = new Option(title, Question.fromDocument(nextQuestion));
+    return obj;
+  }
+
   title: string;
   nextQuestion: IQuestion | null;
 

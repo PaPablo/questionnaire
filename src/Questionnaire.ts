@@ -28,6 +28,4 @@ class Questioannaire {
 
     this.currentQuestion = this.currentQuestion!.nextQuestion(optionNumber);
   }
-
-  public loadFromObject(document: object) {}
 }
