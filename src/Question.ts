@@ -1,5 +1,5 @@
 import { IOption, Option } from "./Option";
-import { Answer } from "./Answer";
+import { IAnswer, Answer } from "./Answer";
 
 interface IQuestion {
   // String array containing indications to the patient
