@@ -1,36 +1,6 @@
 import yaml from "js-yaml";
 import fs from "graceful-fs";
-
-interface IQuestion {
-  // String array containing indications to the patient
-  // Besides the text of the question itself
-  indications: string[];
-
-  // The question
-  text: string;
-
-  // Options to choose from
-  options: IOption[];
-
-  pickOption: { (optionNumber: number): IAnswer };
-  nextQuestion: { (optionNumber: number): IQuestion };
-}
-
-interface IOption {
-  title: string;
-  nextQuestion: IQuestion;
-}
-
-interface IAnswer {
-  // Copy question text here to prevent null references
-  text: string;
-  // What was answered
-  // Option title or answer
-  answer: string;
-
-  // Next answer on Questioannaire
-  nextAnswer: IAnswer;
-}
+import { IQuestion } from "./Question";
 
 class Questioannaire {
   version: string;
