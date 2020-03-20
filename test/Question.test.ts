@@ -9,9 +9,14 @@ describe("Test Question funcionality", () => {
       { title: "Op2", nextQuestion: { text: "Q3" } }
     ]
   };
-  test("Getting and option returns correct option", () => {
+  test("Pick options returns correct answer", () => {
     const question = Question.fromDocument(document);
 
-    expect(question.pickOption(0).text).toBe(question.text)
+    expect(question.pickOption(0).text).toBe(question.text);
+  });
+
+  test("Asking for next question returns correct option", () => {
+    const question = Question.fromDocument(document);
+    expect(question.nextQuestion(1).text).toBe("Q3")
   });
 });

@@ -18,11 +18,10 @@ interface IQuestion {
 
 class Question implements IQuestion {
   static fromDocument(document: any): Question {
-    const {text, indications, options} = document
-
+    const { indications, text, options } = document;
     let obj = new Question(
-      text,
       indications,
+      text,
       options?.map((o: any) => Option.fromDocument(o))
     );
 
@@ -41,7 +40,7 @@ class Question implements IQuestion {
   pickOption(optionNumber: number): IAnswer {
     const pickedOption = this.options[optionNumber] as IOption;
 
-    const answer = new Answer(this.text, pickedOption.title, null)
+    const answer = new Answer(this.text, pickedOption.title, null);
     return answer;
   }
 
